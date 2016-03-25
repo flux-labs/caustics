@@ -1,0 +1,37 @@
+{
+    "Description": "Projects a mesh onto a plane.",
+    "Display": {
+        "InputOrder": [
+            "Mesh",
+            "Plane"
+        ],
+        "OutputOrder": [
+            "Projection"
+        ]
+    },
+    "Inputs": {
+        "Mesh": {
+            "Description": "A mesh",
+            "Type": "*"
+        },
+        "Plane": {
+            "Description": "A plane",
+            "Type": "*"
+        }
+    },
+    "Outputs": {
+        "Projection": {
+            "Description": "The projection of the mesh onto the plane.",
+            "Type": "*"
+        }
+    },
+    "Require": {
+        "js": {
+            "src": "projection.js"
+        }
+    },
+    "Tags": [
+        "Geometry"
+    ],
+    "Type": "flux-labs/geometry/meshProjection"
+}
