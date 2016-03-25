@@ -5,11 +5,11 @@
  * @version  0.0.1
  */
 
-var matrix = require('gl-matrix');
+import matrix from 'gl-matrix';
 
 var EPSILON = 0.0001;
 
-function reflect (reflectiveMesh, incidentVector, groundPlane, sampleDistance) {
+export default function reflect (reflectiveMesh, incidentVector, groundPlane, sampleDistance) {
   var normal = matrix.vec3.normalize([], incidentVector);
   var skyPlane = findSkyPlane(mesh, normal);
 
@@ -19,7 +19,7 @@ function reflect (reflectiveMesh, incidentVector, groundPlane, sampleDistance) {
 
 }
 
-function findSkyPlane (mesh, incidentVector) {
+export function findSkyPlane (mesh, incidentVector) {
   var i, vertex, maxX = 0, maxY = 0, maxZ = 0;
 
   for (i=0; i < mesh.vertices.length; i++) {
@@ -37,7 +37,7 @@ function findSkyPlane (mesh, incidentVector) {
 }
 
 
-function projectMeshOntoPlaneAsSamplePoints(mesh, plane, sampleDistance) {
+export function projectMeshOntoPlaneAsSamplePoints(mesh, plane, sampleDistance) {
   var projectedPoints = {};
 
   for (var i = 0; i < mesh.faces.length; i++) {
@@ -46,7 +46,7 @@ function projectMeshOntoPlaneAsSamplePoints(mesh, plane, sampleDistance) {
 }
 
 
-function projectMeshOntoPlane (mesh, plane) {
+export function projectMeshOntoPlane (mesh, plane) {
   var projectedMesh = {
     primitive: "mesh"
   };
@@ -67,7 +67,7 @@ function projectMeshOntoPlane (mesh, plane) {
 }
 
 
-function projectPointOntoPlane (point, plane) {
+export function projectPointOntoPlane (point, plane) {
   var diff = matrix.vec3.subtract([], point, plane.origin);
   var distanceToPlane = matrix.vec3.dot(diff, plane.normal);
   var scaled = matrix.vec3.scale([], plane.normal, distanceToPlane);
@@ -77,7 +77,7 @@ function projectPointOntoPlane (point, plane) {
 
 
 
-function intersectLinePlane(line, plane) {
+export function intersectLinePlane(line, plane) {
   var p1 = plane.origin;
 
   var q1 = line.start;
@@ -117,17 +117,10 @@ function intersectLinePlane(line, plane) {
   return matrix.vec3.add([], q1, matrix.vec3.scale([], e, t));
 }
 
-function intersectLinesPLane(lines, plane) {
+export function intersectLinesPLane(lines, plane) {
   var intersections = [];
   for (var i = 0; i < lines.length; i++) {
     intersections.push(intersectLinePlane(lines[i], plane));
   }
   return intersections;
-}
-
-module.exports = {
-  projectMeshOntoPlane: projectMeshOntoPlane,
-  projectPointOntoPlane: projectPointOntoPlane,
-  intersectLinePlane: intersectLinePlane,
-  run: reflect
 }

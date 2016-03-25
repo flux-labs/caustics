@@ -1,16 +1,8 @@
 'use strict';
 
-var matrix = require('gl-matrix/gl-matrix');
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-function run(mesh, plane) {
-    return {
-        projection: projectMeshOntoPlane(mesh, plane)
-    };
-}
-
-module.exports = {
-    run: run
-};
+var matrix = _interopDefault(require('gl-matrix'));
 
 function projectMeshOntoPlane (mesh, plane) {
   var projectedMesh = {
@@ -32,6 +24,7 @@ function projectMeshOntoPlane (mesh, plane) {
   return projectedMesh;
 }
 
+
 function projectPointOntoPlane (point, plane) {
   var diff = matrix.vec3.subtract([], point, plane.origin);
   var distanceToPlane = matrix.vec3.dot(diff, plane.normal);
@@ -39,3 +32,15 @@ function projectPointOntoPlane (point, plane) {
   var projectedPoint = matrix.vec3.subtract([], point, scaled);
   return projectedPoint;
 }
+
+function run(mesh, plane) {
+    return {
+        projection: projectMeshOntoPlane(mesh, plane)
+    };
+}
+
+var projection = {
+  run: run
+}
+
+module.exports = projection;

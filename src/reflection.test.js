@@ -7,19 +7,20 @@
 
 'use strict';
 
-var test = require('tape');
-var reflection = require('./reflection.js');
+import test from 'tape';
+import reflect from './reflection.js'
+import {
+  projectPointOntoPlane,
+  projectMeshOntoPlane,
+  intersectLinePlane
+} from './reflection.js';
 
 test('Light intensity simulations', _reflectionTestSuite);
 
 function _reflectionTestSuite (t) {
 
-  t.equal(typeof reflection, 'object',
-      'reflection should be an object.'
-  );
-
-  t.equal(typeof reflection.run, 'function',
-      'reflection.run should be a function.'
+  t.equal(typeof reflect, 'function',
+      'reflect should be a function.'
   );
 
   _testProjectPointPlane(t);
@@ -108,7 +109,7 @@ function _testProjectPointPlane(t) {
     for (var j = 0; j < points.length; j++) {
       point = points[j];
       t.deepEqual(
-        reflection.projectPointOntoPlane(point, plane),
+        projectPointOntoPlane(point, plane),
         projections[i][j],
         'Projection of ' + JSON.stringify(point) + ' onto plane ' + JSON.stringify(plane) + ' should be ' + JSON.stringify(projections[i][j])
       );
@@ -183,7 +184,7 @@ function _testProjectMeshPlane(t) {
     plane = planes[i];
     for (var j = 0; j < meshes.length; j++) {
       mesh = meshes[j];
-      projected = reflection.projectMeshOntoPlane(mesh, plane);
+      projected = projectMeshOntoPlane(mesh, plane);
       t.deepEqual(
         projected.vertices,
         projections[i][j].vertices,
@@ -216,7 +217,7 @@ function _testIntersectLinePlane(t) {
     for (var j = 0; j < lines.length; j++) {
       line = lines[j];
       t.deepEqual(
-        reflection.intersectLinePlane(line, plane),
+        intersectLinePlane(line, plane),
         intersections[i][j],
         'Projection of ' + JSON.stringify(line) + ' onto plane ' + JSON.stringify(plane) + ' should be ' + JSON.stringify(intersections[i][j])
       );
