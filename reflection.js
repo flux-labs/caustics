@@ -117,6 +117,14 @@ function intersectLinePlane(line, plane) {
   return matrix.vec3.add([], q1, matrix.vec3.scale([], e, t));
 }
 
+function intersectLinesPLane(lines, plane) {
+  var intersections = [];
+  for (var i = 0; i < lines.length; i++) {
+    intersections.push(intersectLinePlane(lines[i], plane));
+  }
+  return intersections;
+}
+
 module.exports = {
   projectMeshOntoPlane: projectMeshOntoPlane,
   projectPointOntoPlane: projectPointOntoPlane,
