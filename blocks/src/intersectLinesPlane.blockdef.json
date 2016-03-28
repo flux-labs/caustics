@@ -31,7 +31,7 @@
         }
     },
     "Tags": [
-        "Geometry", "fc-lite"
+        "Geometry"
     ],
     "Type": "flux-labs/geometry/meshProjection"
 }
