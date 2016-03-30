@@ -14,8 +14,11 @@ import {
   projectMeshOntoPlane,
   intersectLinePlane
 } from './reflection.js';
+import proximityTestSuite from './proximity.test.js';
 
 test('Light intensity simulations', _reflectionTestSuite);
+
+test('Proximity detection', proximityTestSuite);
 
 function _reflectionTestSuite (t) {
 

@@ -37,15 +37,6 @@ export function findSkyPlane (mesh, incidentVector) {
 }
 
 
-export function projectMeshOntoPlaneAsSamplePoints(mesh, plane, sampleDistance) {
-  var projectedPoints = {};
-
-  for (var i = 0; i < mesh.faces.length; i++) {
-
-  }
-}
-
-
 export function projectMeshOntoPlane (mesh, plane) {
   var projectedMesh = {
     primitive: "mesh"
@@ -117,10 +108,50 @@ export function intersectLinePlane(line, plane) {
   return matrix.vec3.add([], q1, matrix.vec3.scale([], e, t));
 }
 
-export function intersectLinesPLane(lines, plane) {
+export function intersectLinesPlane(lines, plane) {
   var intersections = [];
   for (var i = 0; i < lines.length; i++) {
     intersections.push(intersectLinePlane(lines[i], plane));
   }
   return intersections;
+}
+
+function compareIndex(a, b, i) {
+  if (a[i] < b[i]) {
+    return -1;
+  } else if (a[i] > b[i]) {
+    return 1;
+  }
+  return 0;
+}
+
+function compareRadix(a,b) {
+  for (var i=0; i< a.length; i++) {
+    var result = compareIndex(a,b,i);
+    if (result !==0) return result;
+  }
+  return 0;
+}
+
+export function findProximityScores(points, radius) {
+  var proximities = [];
+
+  // do the stupid thing
+  var currentCount, firstPoint, secondPoint;
+
+  for (var i=0; i<points.length; i++) {
+    currentCount = 0;
+    for (var j=0; j< points.length; j++) {
+      firstPoint = points[i].point || points[i];
+      secondPoint = points[j].point || points[j];
+      if (i !== j && matrix.vec3.distance(firstPoint, secondPoint) < radius) {
+        currentCount++;
+      }
+    }
+    proximities[i] = currentCount;
+  }
+
+  return proximities;
+
+
 }

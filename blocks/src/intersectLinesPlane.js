@@ -8,6 +8,6 @@ function run(lines, plane) {
     };
 }
 
-export {
+export default {
     run: run
 }
