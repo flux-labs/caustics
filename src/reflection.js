@@ -155,3 +155,18 @@ export function findProximityScores(points, radius) {
 
 
 }
+
+export function translate(point, vector, scale) {
+  var otherPoint = [];
+  for (var i=0; i<point.point.length; i++) {
+    otherPoint.push(point.point[i] + vector.coords[i]*scale);
+  }
+  return otherPoint;
+}
+
+export function translatePoints(points, vectors, scale) {
+  var translated = [];
+  for (var i=0; i<points.length; i++) {
+    translated.push(translate(points[i], vectors[i], scale));
+  }
+}
