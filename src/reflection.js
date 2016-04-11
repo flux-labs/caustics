@@ -169,4 +169,5 @@ export function translatePoints(points, vectors, scale) {
   for (var i=0; i<points.length; i++) {
     translated.push(translate(points[i], vectors[i], scale));
   }
+  return translated;
 }

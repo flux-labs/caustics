@@ -5,7 +5,7 @@
   "main": "reflection.js",
   "scripts": {
     "test": "rollup -c rollup.config.test.js && tape dist/reflection.test.js",
-    "build": "cp blocks/src/* blocks/dist && rollup -c -i blocks/src/translatePoints.js -o blocks/dist/translatePoints.js -f cjs"
+    "build": "cp blocks/src/* blocks/dist && rollup -c -i blocks/src/intersectLinesPlane.js -o blocks/dist/intersectLinesPlane.js -f cjs"
   },
   "keywords": [
     "caustics"
